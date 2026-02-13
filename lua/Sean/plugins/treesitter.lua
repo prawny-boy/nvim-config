@@ -6,19 +6,18 @@ return {
         local treesitter = require("nvim-treesitter")
 
         treesitter.setup({
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = {
-                enable = true,
-            },
-            automatic_installation = true,
-            ensure_installed = {
-                "lua",
-                "python",
-                "java",
-            }
+            install_dir = vim.fn.stdpath('data') .. '/site'
         })
-    end,
+        treesitter.install({
+            "java",
+            "cpp",
+            "python",
+            "lua",
+            "tsx",
+        })
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = { "lua", "cpp", "python", "java" },
+      callback = function() vim.treesitter.start() end,
+    })
+end
 }
