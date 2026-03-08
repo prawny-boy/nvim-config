@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 
 -- Indent multiple lines that are selected
 vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts) 
+vim.keymap.set("v", ">", ">gv", opts)
 
 -- Highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -27,6 +27,9 @@ vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" }
 vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" })
 vim.keymap.set("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 vim.keymap.set("n", "<leader>wx", "<cmd>close<CR>", { desc = "Close current split" })
+
+vim.keymap.set("n", ";", ":")
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 
 -- Copy filepath to the clipboard
 vim.keymap.set("n", "<leader>fp", function()
