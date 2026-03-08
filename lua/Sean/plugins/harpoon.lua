@@ -13,18 +13,17 @@ return {
                 save_on_toggle = true,
                 save_on_change = true,
             },
-
             default = {
-                get_root_dir = function()
-                    return vim.loop.cwd()
-                end,
-
-                encode = function(item)
-                    return vim.fn.fnamemodify(item.value, ":.")
-                end,
-
-                decode = function(rel_path)
-                    return vim.loop.cwd() .. "/" .. rel_path
+                display = function(list_item)
+                    local path = list_item.value
+                    if not path then return "" end
+                    -- Show last 3 path components
+                    local parts = {}
+                    for part in path:gmatch("[^\\/]+") do
+                        table.insert(parts, part)
+                    end
+                    local start = math.max(1, #parts - 2)
+                    return table.concat(parts, "/", start)
                 end,
             },
         })
