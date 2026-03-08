@@ -18,6 +18,14 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {"williamboman/mason-lspconfig.nvim"},
     config = function()
+      -- Configure jdtls using new vim.lsp.config API (Neovim 0.11+)
+      vim.lsp.config('jdtls', {
+        cmd = { 'jdtls' },
+        filetypes = { 'java' },
+        root_markers = { 'pom.xml', 'build.gradle', '.git' },
+      })
+      vim.lsp.enable('jdtls')
+      
       vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(args)
